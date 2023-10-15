@@ -1,4 +1,10 @@
-const Router = require('express').Router;
+// const express = require('express')
+// const router = express.Router()
+const router = require('express').Router();
+
+const userController = require('../controller/userController');
+
+
 
 /** 
  * -- filter
@@ -14,13 +20,13 @@ const Router = require('express').Router;
  * get user by id or email
  * @route /api/v1/users/:userId or /api/v1/users?email="email"
  */
-router.get('/:userId', () => {})
 
-/**
- * get all users by email
- * @route /api/v1/users?email="email"
- */
-router.get('/', () => {})
+
+router.get('/:userId', userController.getUserById);
+
+
+
+
 
 /**
  * Update user by Id
@@ -43,7 +49,7 @@ router.patch('/:userId', () => {})
  * @method DELETE
  * @route /api/v1/users/:userId
  */
-router.delete('/:userId', () => {});
+router.delete('/:userId', userController.deleteUserById);
 
 /**
  * Get users
@@ -51,12 +57,14 @@ router.delete('/:userId', () => {});
  * @route /api/v1/users
  */
 
-router.get('/', () => {})
+router.get('/', userController.getUsers)
 
 /**
  * create a user
  */
-router.post('/',() => {})
+router.post('/',userController.getUsers)
 
 
-module.exports = router;
+module.exports = {
+    router
+};

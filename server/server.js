@@ -4,7 +4,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 //require dotenv
 require('dotenv').config();
 
-const authenticate = require('./middleware/authenticate');
+const authenticate = require('./middlewares/authenticate');
 const routes = require('./routes');
 
 const app = express();
