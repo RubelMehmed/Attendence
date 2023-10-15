@@ -1,5 +1,9 @@
 const express = require('express');
 const connectDB = require('./db');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+//require dotenv
+require('dotenv').config();
+
 const authenticate = require('./middleware/authenticate');
 const routes = require('./routes');
 
@@ -48,8 +52,7 @@ app.use((err, _req, res, _next) => {
 //mongodb atlas __________________
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://mehmed:mehmed@cluster0.ssmjtak.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URI;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -63,7 +66,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
-    await client.db("admin").command({ ping: 1 });
+    await client.db("attendance").command({ ping: 1 });
     console.log("Successfully connected to MongoDB!");
   } finally {
     app.listen(4000, () => {
