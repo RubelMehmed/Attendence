@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const Error = require('../utils/error');
+const error = require('../utils/error');
 const userService = require('../service/userService');
 const authServie = require('../service/authService');
 
@@ -54,7 +54,35 @@ const putUserById = (req, res, next) => {};
 
 const patchUserById = (req, res, next) => {};
 
-const deleteUserById = (req, res, next) => {};
+/**
+ * @sudocode 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns {Promise}
+ */
+/**
+ * @sudocode for the delete operation
+ * UserId = input()
+ * user = find user by userId
+ * if user not found throw error
+ * else delete the user form DB
+ * delete all associated data
+ * else return the response
+ * 
+ */
+const deleteUserById =async(req, res, next) => {
+    const userId = req.params.userId;
+    try {
+        const user = await userService.findUserByProperty('_id', userId);
+
+        if(!user){
+            throw error('User not found', 404);
+        }
+    } catch (e) {
+        next(e)
+    }
+};
 
 module.exports = {
     getUsers,

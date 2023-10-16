@@ -62,9 +62,7 @@ router.get('/', userController.getUsers)
 /**
  * create a user
  */
-router.post('/',userController.getUsers)
+router.post('/',userController.postUser)
 
 
-module.exports = {
-    router
-};
+module.exports =   router;

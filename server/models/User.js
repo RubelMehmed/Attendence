@@ -38,3 +38,11 @@ const userSchema = new Schema({
 const User = model('User', userSchema);
 
 module.exports = User;
+
+// {
+// 	"name":"Rubel Mehmed",
+// 	"email":"rubelmehmed@gmail.com",
+// 	"password":"mehmed",
+// 	"roles":"STUDENT",
+// 	"accountStatus":"ACTIVE"
+//   }
