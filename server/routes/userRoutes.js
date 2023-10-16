@@ -33,7 +33,7 @@ router.get('/:userId', userController.getUserById);
  * @method PUT
  * @route /api/v1/users/:userId
  */
-router.put('/:userId', () => {});
+router.put('/:userId', userController.putUserById);
 
 
 /**
@@ -42,7 +42,7 @@ router.put('/:userId', () => {});
  * @route /api/v1/users/:userId
  */
 
-router.patch('/:userId', () => {})
+router.patch('/:userId', userController.patchUserById);
 
 /** 
  * Delete user by User

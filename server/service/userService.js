@@ -34,9 +34,20 @@ const createNewUser = ({ name, email, password }) => {
  *  
  */
 
+
+const updateUser = async(id, data) => {
+	const user = await findUserByProperty('email', data.email);
+
+	if (user) {
+		throw new Error('User already exists');
+	}
+
+	return User.findByIdAndUpdate(id, data, { new: true });
+}
+
 module.exports = {
 	findUsers,
 	findUserByProperty,
 	createNewUser,
-
+	updateUser,
 };  
