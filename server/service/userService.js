@@ -17,6 +17,23 @@ const createNewUser = ({ name, email, password }) => {
 	return user.save();
 };
 
+/**
+ * @sudocode for the delete operation
+ * UserId = input()
+ * UserName = input()
+ * UserEmail = input()
+ * UserRoles = input()
+ * UserAccountStatus = input()
+ * user = find user by userId
+ * if user not found throw error
+ * else delete the user form DB
+ * return the response
+ * @param {Object} user
+ * @return {Object}
+ * @api private
+ *  
+ */
+
 module.exports = {
 	findUsers,
 	findUserByProperty,

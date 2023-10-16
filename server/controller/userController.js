@@ -22,7 +22,7 @@ const getUserById = async (req, res, next) => {
     const userId = req.params.userId;
 
     try {
-        const user = await userService.findUsersByProperty('_id', userId);
+        const user = await userService.findUserByProperty('_id', userId);
         
         if (!user) {
             throw error('user not found', 404);
@@ -52,7 +52,37 @@ try {
 
 const putUserById = (req, res, next) => {};
 
-const patchUserById = (req, res, next) => {};
+
+/**
+ * @sudocode for the patch request
+ * find user by userId
+ * if user not found throw error
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+const patchUserById = async(req, res, next) => {
+    const { userId } = req.params;
+    const { name, roles, accountStatus } = req.body;
+
+    try {
+        const user = await userService.findUserByProperty('_id', userId);
+        if (!user) {
+            throw error('User not found', 404);
+        }
+
+        user.name = name?? user.name
+        user.roles = roles ?? user.roles
+        user.accountStatus = accountStatus ?? user.accountStatus
+        await user.save();
+        return res.status(200).json({ success: true, data: user });
+
+    } catch (e) {
+        next(e);
+        
+    }
+};
 
 /**
  * @sudocode 
@@ -79,6 +109,8 @@ const deleteUserById =async(req, res, next) => {
         if(!user){
             throw error('User not found', 404);
         }
+        await user.remove();
+        return res.status(203).send();
     } catch (e) {
         next(e)
     }
