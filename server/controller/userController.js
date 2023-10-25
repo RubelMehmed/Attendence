@@ -60,7 +60,7 @@ const putUserById = async(req, res, next) => {
         if (!user) {
             throw error('User not found', 404);
         };
-
+ 
         return res.status(200).json({ user })
     } catch (e) {
         next(e);
