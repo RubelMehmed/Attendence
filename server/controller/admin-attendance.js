@@ -1,8 +1,8 @@
 // import { addMinutes, isAfter } from 'date-fns';
 const { addMinutes, isAfter } = require('date-fns')
-
-
 const AdminAttendance = require('../models/AdminAttendance');
+
+const error = require('../utils/error');
 
 const getEnable = async (_req, res, next) =>{
     try {
@@ -50,7 +50,7 @@ const getStatus = async (_req, res, next) =>{
         }
 
         const started = addMinutes( new Date(running.createdAt), running.timeLimit);
-        if (isAfter(newDate(), started)) {
+        if (isAfter(new Date(), started)) {
             running.status = 'COMPLETED';
             await running.save();
         }
@@ -62,7 +62,7 @@ const getStatus = async (_req, res, next) =>{
 
 
 
-module.export = {
+module.exports = {
     getEnable,
     getDisable,
     getStatus,
